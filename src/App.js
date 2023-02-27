@@ -3,8 +3,10 @@ import { useState } from "react";
 
 function App() {
   const [des, setDes] = useState("");
-  var num = 0;
-  var IsClear = false;
+  const [num, setNum] = useState(0);
+  const [lastOperation, setLastOperation] = useState("");
+  const [IsClear, setIsClear] = useState(false);
+
 
   return (
     <>
@@ -50,9 +52,7 @@ function App() {
             <div className="col-md-2">
               <button className="btn btn-primary btn-lg" onClick={() => {
                 if (IsClear) {
-                  num = Number.parseInt(des);
                   setDes("1");
-
                 } else {
                   setDes(des + "1");
                 }
@@ -79,7 +79,33 @@ function App() {
               <button className="btn btn-warning btn-lg">=</button>
             </div>
             <div className="col-md-2">
-              <button className="btn btn-success btn-lg">+</button>
+              <button className="btn btn-success btn-lg" onClick={() => {
+                setIsClear(true);
+                if (lastOperation == "+") {
+                  setNum(num + Number.parseInt(des));
+                  setDes(num + Number.parseInt(des));
+                  setLastOperation("");
+                }
+                if (lastOperation == "-") {
+                  setNum(num - Number.parseInt(des));
+                  setDes(num - Number.parseInt(des));
+                  setLastOperation("");
+                }
+                if (lastOperation == "*") {
+                  setNum(num * Number.parseInt(des));
+                  setDes(num * Number.parseInt(des));
+                  setLastOperation("");
+                }
+                if (lastOperation == "/") {
+                  setNum(num / Number.parseInt(des));
+                  setDes(num / Number.parseInt(des));
+                  setLastOperation("");
+                }
+                if (lastOperation == "") {
+                  setNum(Number.parseInt(des));
+                }
+                setLastOperation("+");
+              }}>+</button>
             </div>
           </div>
         </div>
