@@ -1,7 +1,6 @@
-import { useState } from "react";
+import React, { useState } from 'react'
 
-
-function App() {
+export const App = () => {
   const [des, setDes] = useState("");
   var tmpDes = "";
   const [num, setNum] = useState(0);
@@ -60,78 +59,51 @@ function App() {
   }
 
   return (
+
     <>
-      <div className="container p-2">
-        <div className="col-md-5"></div>
-        <div className="col-md-3">
-          <div className="row">
-            <div className="col-md-8">
-              <div className="alert alert-primary" role="alert">
+      <div className='row'>
+        <div className="col-4" ></div>
+        <div className="col-4">
+          <div className="card mt-3">
+            <span className='p-2' style={{ fontWeight: 'bold' }}>CASIO Calculator</span>
+            <div className='row px-3' style={{ height: '60px' }}>
+              <div className="col-10 alert alert-primary" style={{ margin: '0px' }}>
                 {des}
+              </div>
+              <div className="col-2 alert alert-secondary" style={{ margin: '0px' }}>
+                {lastOperation}
+              </div>
+            </div>
+            <div class="card-body">
+              <div className='row'>
+                <button className="w-25 btn btn-primary btn-lg border border-secondary" onClick={() => { btnNum("7"); }}>7</button>
+                <button className="w-25 btn btn-primary btn-lg border border-secondary" onClick={() => { btnNum("8"); }}>8</button>
+                <button className="w-25 btn btn-primary btn-lg border border-secondary" onClick={() => { btnNum("9"); }}>9</button>
+                <button className="w-25 btn btn-success btn-lg border border-secondary" onClick={() => { operation("/"); }}>/</button>
+              </div>
+              <div className='row'>
+                <button className="w-25 btn btn-primary btn-lg border border-secondary" onClick={() => { btnNum("4"); }}>4</button>
+                <button className="w-25 btn btn-primary btn-lg border border-secondary" onClick={() => { btnNum("5"); }}>5</button>
+                <button className="w-25 btn btn-primary btn-lg border border-secondary" onClick={() => { btnNum("6"); }}>6</button>
+                <button className="w-25 btn btn-success btn-lg border border-secondary" onClick={() => { operation("*"); }}>*</button>
+              </div>
+              <div className='row'>
+                <button className="w-25 btn btn-primary btn-lg border border-secondary" onClick={() => { btnNum("1"); }}>1</button>
+                <button className="w-25 btn btn-primary btn-lg border border-secondary" onClick={() => { btnNum("2"); }}>2</button>
+                <button className="w-25 btn btn-primary btn-lg border border-secondary" onClick={() => { btnNum("3"); }}>3</button>
+                <button className="w-25 btn btn-success btn-lg border border-secondary" onClick={() => { operation("-"); }}>-</button>
+              </div>
+              <div className='row'>
+                <button className="w-25 btn btn-primary btn-lg border border-secondary" onClick={() => { btnNum("0"); }}>0</button>
+                <button className="w-25 btn btn-primary btn-lg border border-secondary" onClick={() => { dot(); }}>.</button>
+                <button className="w-25 btn btn-warning btn-lg border border-secondary" onClick={() => { equal(); }}>=</button>
+                <button className="w-25 btn btn-success btn-lg border border-secondary" onClick={() => { operation("+"); }}>+</button>
               </div>
             </div>
           </div>
-          <div className="row">
-            <div className="col-md-2">
-              <button className="btn btn-primary btn-lg" onClick={() => { btnNum("7"); }}>7</button>
-            </div>
-            <div className="col-md-2">
-              <button className="btn btn-primary btn-lg" onClick={() => { btnNum("8"); }}>8</button>
-            </div>
-            <div className="col-md-2">
-              <button className="btn btn-primary btn-lg" onClick={() => { btnNum("9"); }}>9</button>
-            </div>
-            <div className="col-md-2">
-              <button className="btn btn-success btn-lg" onClick={() => { operation("/"); }}>/</button>
-            </div>
-          </div>
-          <div className="row pt-2">
-            <div className="col-md-2">
-              <button className="btn btn-primary btn-lg" onClick={() => { btnNum("4"); }}>4</button>
-            </div>
-            <div className="col-md-2">
-              <button className="btn btn-primary btn-lg" onClick={() => { btnNum("5"); }}>5</button>
-            </div>
-            <div className="col-md-2">
-              <button className="btn btn-primary btn-lg" onClick={() => { btnNum("6"); }}>6</button>
-            </div>
-            <div className="col-md-2">
-              <button className="btn btn-success btn-lg" onClick={() => { operation("*"); }}>*</button>
-            </div>
-          </div>
-          <div className="row pt-2">
-            <div className="col-md-2">
-              <button className="btn btn-primary btn-lg" onClick={() => { btnNum("1"); }}>1</button>
-            </div>
-            <div className="col-md-2">
-              <button className="btn btn-primary btn-lg" onClick={() => { btnNum("2"); }}>2</button>
-            </div>
-            <div className="col-md-2">
-              <button className="btn btn-primary btn-lg" onClick={() => { btnNum("3"); }}>3</button>
-            </div>
-            <div className="col-md-2">
-              <button className="btn btn-success btn-lg" onClick={() => { operation("-"); }}>-</button>
-            </div>
-          </div>
-          <div className="row pt-2">
-            <div className="col-md-2">
-              <button className="btn btn-primary btn-lg" onClick={() => { btnNum("0"); }}>0</button>
-            </div>
-            <div className="col-md-2">
-              <button className="btn btn-primary btn-lg" onClick={() => { dot(); }}>.</button>
-            </div>
-            <div className="col-md-2">
-              <button className="btn btn-warning btn-lg" onClick={() => { equal(); }}>=</button>
-            </div>
-            <div className="col-md-2">
-              <button className="btn btn-success btn-lg" onClick={() => { operation("+"); }}>+</button>
-            </div>
-          </div>
         </div>
+        <div className="col-4" ></div>
       </div>
-      <div className="col-md-4"></div>
     </>
-  );
+  )
 }
-
-export default App;
