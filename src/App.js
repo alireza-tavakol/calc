@@ -3,10 +3,61 @@ import { useState } from "react";
 
 function App() {
   const [des, setDes] = useState("");
+  var tmpDes = "";
   const [num, setNum] = useState(0);
   const [lastOperation, setLastOperation] = useState("");
   const [IsClear, setIsClear] = useState(false);
 
+  const btnNum = (bt) => {
+    if (IsClear) {
+      setDes(bt);
+      setIsClear(false);
+    } else {
+      setDes(des + bt);
+    }
+  }
+
+  const dot = () => {
+    if (IsClear) {
+      setDes("0.");
+      setIsClear(false);
+    } else {
+      if (des.includes(".") === false) {
+        setDes(des + ".");
+      }
+    }
+  }
+
+  const equal = () => {
+    setIsClear(true);
+    if (lastOperation === "+") {
+      setDes(Number.parseFloat(num) + Number.parseFloat(des));
+      tmpDes = Number.parseFloat(num) + Number.parseFloat(des);
+    }
+    if (lastOperation === "-") {
+      setDes(Number.parseFloat(num) - Number.parseFloat(des));
+      tmpDes = Number.parseFloat(num) - Number.parseFloat(des);
+    }
+    if (lastOperation === "*") {
+      setDes(Number.parseFloat(num) * Number.parseFloat(des));
+      tmpDes = Number.parseFloat(num) * Number.parseFloat(des);
+    }
+    if (lastOperation === "/") {
+      setDes(Number.parseFloat(num) / Number.parseFloat(des));
+      tmpDes = Number.parseFloat(num) / Number.parseFloat(des);
+    }
+    setLastOperation("");
+  }
+
+  const operation = (bt) => {
+    equal();
+    if (tmpDes === "") {
+      setNum(des);
+    } else {
+      setNum(tmpDes);
+    }
+    setLastOperation(bt);
+  }
 
   return (
     <>
@@ -22,90 +73,58 @@ function App() {
           </div>
           <div className="row">
             <div className="col-md-2">
-              <button className="btn btn-primary btn-lg">7</button>
+              <button className="btn btn-primary btn-lg" onClick={() => { btnNum("7"); }}>7</button>
             </div>
             <div className="col-md-2">
-              <button className="btn btn-primary btn-lg">8</button>
+              <button className="btn btn-primary btn-lg" onClick={() => { btnNum("8"); }}>8</button>
             </div>
             <div className="col-md-2">
-              <button className="btn btn-primary btn-lg">9</button>
+              <button className="btn btn-primary btn-lg" onClick={() => { btnNum("9"); }}>9</button>
             </div>
             <div className="col-md-2">
-              <button className="btn btn-success btn-lg">/</button>
-            </div>
-          </div>
-          <div className="row pt-2">
-            <div className="col-md-2">
-              <button className="btn btn-primary btn-lg">4</button>
-            </div>
-            <div className="col-md-2">
-              <button className="btn btn-primary btn-lg">5</button>
-            </div>
-            <div className="col-md-2">
-              <button className="btn btn-primary btn-lg">6</button>
-            </div>
-            <div className="col-md-2">
-              <button className="btn btn-success btn-lg">*</button>
+              <button className="btn btn-success btn-lg" onClick={() => { operation("/"); }}>/</button>
             </div>
           </div>
           <div className="row pt-2">
             <div className="col-md-2">
-              <button className="btn btn-primary btn-lg" onClick={() => {
-                if (IsClear) {
-                  setDes("1");
-                } else {
-                  setDes(des + "1");
-                }
-              }}>1</button>
+              <button className="btn btn-primary btn-lg" onClick={() => { btnNum("4"); }}>4</button>
             </div>
             <div className="col-md-2">
-              <button className="btn btn-primary btn-lg">2</button>
+              <button className="btn btn-primary btn-lg" onClick={() => { btnNum("5"); }}>5</button>
             </div>
             <div className="col-md-2">
-              <button className="btn btn-primary btn-lg">3</button>
+              <button className="btn btn-primary btn-lg" onClick={() => { btnNum("6"); }}>6</button>
             </div>
             <div className="col-md-2">
-              <button className="btn btn-success btn-lg">-</button>
+              <button className="btn btn-success btn-lg" onClick={() => { operation("*"); }}>*</button>
             </div>
           </div>
           <div className="row pt-2">
             <div className="col-md-2">
-              <button className="btn btn-primary btn-lg">0</button>
+              <button className="btn btn-primary btn-lg" onClick={() => { btnNum("1"); }}>1</button>
             </div>
             <div className="col-md-2">
-              <button className="btn btn-primary btn-lg">.</button>
+              <button className="btn btn-primary btn-lg" onClick={() => { btnNum("2"); }}>2</button>
             </div>
             <div className="col-md-2">
-              <button className="btn btn-warning btn-lg">=</button>
+              <button className="btn btn-primary btn-lg" onClick={() => { btnNum("3"); }}>3</button>
             </div>
             <div className="col-md-2">
-              <button className="btn btn-success btn-lg" onClick={() => {
-                setIsClear(true);
-                if (lastOperation == "+") {
-                  setNum(num + Number.parseInt(des));
-                  setDes(num + Number.parseInt(des));
-                  setLastOperation("");
-                }
-                if (lastOperation == "-") {
-                  setNum(num - Number.parseInt(des));
-                  setDes(num - Number.parseInt(des));
-                  setLastOperation("");
-                }
-                if (lastOperation == "*") {
-                  setNum(num * Number.parseInt(des));
-                  setDes(num * Number.parseInt(des));
-                  setLastOperation("");
-                }
-                if (lastOperation == "/") {
-                  setNum(num / Number.parseInt(des));
-                  setDes(num / Number.parseInt(des));
-                  setLastOperation("");
-                }
-                if (lastOperation == "") {
-                  setNum(Number.parseInt(des));
-                }
-                setLastOperation("+");
-              }}>+</button>
+              <button className="btn btn-success btn-lg" onClick={() => { operation("-"); }}>-</button>
+            </div>
+          </div>
+          <div className="row pt-2">
+            <div className="col-md-2">
+              <button className="btn btn-primary btn-lg" onClick={() => { btnNum("0"); }}>0</button>
+            </div>
+            <div className="col-md-2">
+              <button className="btn btn-primary btn-lg" onClick={() => { dot(); }}>.</button>
+            </div>
+            <div className="col-md-2">
+              <button className="btn btn-warning btn-lg" onClick={() => { equal(); }}>=</button>
+            </div>
+            <div className="col-md-2">
+              <button className="btn btn-success btn-lg" onClick={() => { operation("+"); }}>+</button>
             </div>
           </div>
         </div>
